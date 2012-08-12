@@ -1,0 +1,24 @@
+#!/bin/sh
+help() {
+  echo "$0 [-a] [-s skel] orig dest"
+  exit 1
+}
+
+FIND_OPT='-not -name ".*"'
+while true;
+do
+  case "$1" in
+    -- ) break ;;
+    -s ) shift; SQUEL=$1; shift ;;
+    -a ) shift; FIND_OPT= ;;
+    -h) help ;;
+    *) break;;
+  esac
+done
+
+orig=$1; shift;
+dest=$1; shift;
+
+[ -z $SQUEL ] && SQUEL=$orig;
+
+squel.pl  -v -squel "$SQUEL" -rm "$@" `find "$orig" $FIND_OPT -type f -o -type l` "$dest";
