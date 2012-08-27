@@ -18,7 +18,7 @@ Print or remove non valid symlinks.
 
 ### Description
 
-Convert absolute symlinks to relavite ones.
+Convert absolute symlinks to relative ones.
 
 ## `rel_to_abs.pl`
 

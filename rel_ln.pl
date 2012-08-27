@@ -68,7 +68,7 @@ for my $orig (@ARGV) {
   else {
     $target=File::Spec->abs2rel($orig,$dir);
   }
-  if (-e $dest) {
+  if (-e $dest or -l $dest) {
     if ($opt_force == 1 or $opt_force > -1 && -l $dest) {
           print "removing $dest\n" if ($opt_verbose);
           unlink($dest) or die "Error in rm $dest: $!\n" unless ($opt_test);
