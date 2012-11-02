@@ -5,8 +5,9 @@ A set of tools to help in the manipulation of symlinks, using the
 `File::Spec` and `Cwd::abs_path` perl modules. They are released under the
 MIT licence, see COPYING.
 
-*Warning* Some of these utilities can delete files on the filesystem, so
-use them with care, especially when you use the `-f` switch!
+*Warning* Most of these utilities deal only with symlinks, but some
+(`mv_and_ln`, `squel`) can also delete more general files on the
+filesystem, so use them with care, especially with the `-f` switch!
 
 ## `bad_links`
 
