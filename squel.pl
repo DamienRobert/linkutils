@@ -122,6 +122,10 @@ for my $i (@ARGV) {
       }
     }
   };
+  if ($opt_remove && ! -e $destf) {
+    print "$destf does not exist (probably a bad symlink), removing\n" if ($opt_verbose);
+    unlink($destf) or warn "Error in rm $destf: $!\n" unless ($opt_test);
+  }
 
   if (! -e $dest ) {
     print "mkdir -p $dest\n" if ($opt_verbose);
@@ -148,14 +152,20 @@ for my $i (@ARGV) {
     }
   };
 
-  if ($opt_hardlink || $opt_link and -e $destf) {
-    if ($opt_force == 1 or $opt_force > -1 && -l $destf) {
-          print "removing $destf\n" if ($opt_verbose);
-          unlink($destf) or die "Error in rm $dest: $!\n" unless ($opt_test);
+  if ($opt_hardlink || $opt_link ) {
+    if (-e $destf) {
+      if ($opt_force == 1 or $opt_force > -1 && -l $destf) {
+            print "removing $destf\n" if ($opt_verbose);
+            unlink($destf) or die "Error in rm $dest: $!\n" unless ($opt_test);
+      }
+      else {
+        warn "File $destf exists\n";
+        next;
+      }
     }
     else {
-      warn "File $destf exists\n";
-      next;
+      print "$destf does not exist (probably a bad symlink), removing\n" if ($opt_verbose);
+      unlink($destf) or warn "Error in rm $destf: $!\n" unless ($opt_test);
     }
   }
   if ($opt_hardlink) {
