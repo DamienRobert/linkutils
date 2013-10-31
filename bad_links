@@ -19,13 +19,13 @@ done
 
 find "$@" $MAXDEPTH -type l -print | while read TARGET; do 
     SRC=$(readlink ${TARGET})
-    ( cd $(dirname $TARGET);
+    ( cd "$(dirname $TARGET)";
     if [[ ! -e $SRC ]]; then 
       if [[ -z $REMOVE ]]; then
         echo "BAD LINK: ${TARGET} -> ${SRC}"
       else
         echo "rm BAD LINK: ${TARGET} -> ${SRC}"
-        rm  $(basename $TARGET)
+        rm "$(basename $TARGET)"
       fi
     fi 
     )
