@@ -21,4 +21,4 @@ dest=$1; shift;
 
 [ -z $SQUEL ] && SQUEL=$orig;
 
-squel.pl  -v -squel "$SQUEL" -ln "$@" `find "$orig" $FIND_OPT -type f -o -type l` "$dest";
+squel.pl -v -squel "$SQUEL" -ln "$@" `find "$orig" $FIND_OPT -type f -o -type l` "$dest";
