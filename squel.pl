@@ -122,7 +122,7 @@ for my $i (@ARGV) {
       }
     }
   };
-  if ($opt_remove && ! -e $destf) {
+  if ($opt_remove && ! -e $destf && -h $destf) {
     print "$destf does not exist (probably a bad symlink), removing\n" if ($opt_verbose);
     unlink($destf) or warn "Error in rm $destf: $!\n" unless ($opt_test);
   }
