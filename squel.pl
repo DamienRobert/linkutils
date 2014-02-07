@@ -107,7 +107,7 @@ for my $i (@ARGV) {
   $dest="$dest/$rac";
   my $destf="$dest/$file";
 
-  if ($opt_remove && -e $destf) {
+  if ($opt_remove && (-e $destf || -l $destf)) {
     if ($opt_recursive && -d $destf) {
       print "rm $rmoptions $destf" if ($opt_verbose);
       system("rm", $rmoptions, $destf) or warn "Error in rm -rf $destf: $!\n" unless ($opt_test);
@@ -122,12 +122,12 @@ for my $i (@ARGV) {
       }
     }
   };
-  if ($opt_remove && ! -e $destf && -h $destf) {
+  if ($opt_remove && ! -e $destf && -l $destf) {
     print "$destf does not exist (probably a bad symlink), removing\n" if ($opt_verbose);
     unlink($destf) or warn "Error in rm $destf: $!\n" unless ($opt_test);
   }
 
-  if (! -e $dest ) {
+  if (! -e $dest && ! -l $destf) {
     print "mkdir -p $dest\n" if ($opt_verbose);
     system("mkdir","-p",$dest) unless ($opt_test);
   }
@@ -142,7 +142,7 @@ for my $i (@ARGV) {
   };
 
   if ($opt_move or $opt_moveandln) {
-    if (! -e $destf or $opt_force == 1 or $opt_force > -1 && -l $dest) {
+    if (! (-e $destf || -l $destf) or $opt_force == 1 or $opt_force > -1 && -l $destf) {
       print "mv $i $destf\n" if ($opt_verbose);
       rename($i,$destf) or warn "Error in mv $i $destf: $!\n" unless ($opt_test);
     }
@@ -153,7 +153,7 @@ for my $i (@ARGV) {
   };
 
   if ($opt_hardlink || $opt_link ) {
-    if (-e $destf) {
+    if (-e $destf || -l $destf) {
       if ($opt_force == 1 or $opt_force > -1 && -l $destf) {
             print "removing $destf\n" if ($opt_verbose);
             unlink($destf) or die "Error in rm $dest: $!\n" unless ($opt_test);
@@ -162,10 +162,6 @@ for my $i (@ARGV) {
         warn "File $destf exists\n";
         next;
       }
-    }
-    else {
-      print "$destf does not exist (probably a bad symlink), removing\n" if ($opt_verbose);
-      unlink($destf) or warn "Error in rm $destf: $!\n" unless ($opt_test);
     }
   }
   if ($opt_hardlink) {
