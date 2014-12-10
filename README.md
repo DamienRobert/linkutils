@@ -59,3 +59,9 @@ in this directory to files in the package. I use this to install latex
 packages to `~/texmf`, or before switching to [pathogen](https://github.com/tpope/vim-pathogen) to install vim packages in `~/.vim`.
 
 `install_package` and `rm_package` are wrappers around `squel.pl`.
+
+## Copyright
+
+Copyright © 2007-2012 Damien Robert
+
+MIT License. See {file:COPYING} for more details.
