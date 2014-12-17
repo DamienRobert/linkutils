@@ -1,6 +1,6 @@
 #!/bin/zsh
 help() {
-  echo "$0 [-r] [-a] dir"
+  echo "$0 [-rm] [-a] dir"
   exit 1
 }
 
@@ -10,7 +10,7 @@ while true;
 do
   case "$1" in
     -- ) break ;;
-    -r ) shift; REMOVE=true ;;
+    -rm ) shift; REMOVE=true ;;
     -a ) shift; MAXDEPTH=();;
     -h) help ;;
     *) break;;
