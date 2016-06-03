@@ -62,6 +62,6 @@ packages to `~/texmf`, or before switching to [pathogen](https://github.com/tpop
 
 ## Copyright
 
-Copyright © 2007-2012 Damien Robert
+Copyright © 2007–2014 Damien Robert
 
 MIT License. See {file:COPYING} for more details.
