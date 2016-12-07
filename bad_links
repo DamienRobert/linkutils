@@ -10,7 +10,7 @@ while true;
 do
   case "$1" in
     -- ) break ;;
-    -rm ) shift; REMOVE=true ;;
+    --rm|-rm ) shift; REMOVE=true ;;
     -a ) shift; MAXDEPTH=();;
     -h) help ;;
     *) break;;
