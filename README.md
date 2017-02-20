@@ -64,4 +64,4 @@ packages to `~/texmf`, or before switching to [pathogen](https://github.com/tpop
 
 Copyright © 2007–2016 Damien Robert
 
-MIT License. See {file:COPYING} for more details.
+MIT License. See [LICENSE.txt](./LICENSE.txt) for details.
